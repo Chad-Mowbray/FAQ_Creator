@@ -1,5 +1,5 @@
 ### Purpose
-This is a tool for providing an overview of who our clients are and what their problems are.
+This is a tool for providing an overview of who our clients are, what their problems are, and how we solve them.
 
 ### Usage
 1. Clone this repo
@@ -15,3 +15,9 @@ python main.py -input myCsvFile.csv
 This will produce four text files in the /output folder.
 
 If you would like to see graphs, add the "-plot" flag to the command.
+
+### Information
+This program currently provides three metrics:
+1. VOH sessions per department (who are clients are)
+2. Clients' reasons for coming to VOH (what their problems are)
+3. Bigrams of our solution notes (how we solve them)
