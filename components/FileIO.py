@@ -2,7 +2,8 @@ import pandas as pd
 
 
 class FileIO:
-    def __init__(self):
+    def __init__(self, filename):
+        self.input_file = filename
         self.df = self.read_raw_csv()
 
     def __new__(cls, *args, **kwargs):
@@ -12,7 +13,7 @@ class FileIO:
 
 
     def read_raw_csv(self):
-        return pd.read_csv('input/VOH_CSV.csv')
+        return pd.read_csv(f'input/{self.input_file}')
 
     
     def clean_df(self):
@@ -40,37 +41,6 @@ class FileIO:
         with open(f'output/{filename}.txt', 'w') as file:
             for pair in data:
                 file.write(str(pair) + "\n")
-
-
-    # @staticmethod
-    # def write_dept_freqs(sorted_dept_freqs):
-    #     with open('output/frequency_by_department.txt', 'w') as file:
-    #         for pair in sorted_dept_freqs:
-    #             file.write(str(pair) + "\n")
-
-    # @staticmethod
-    # def write_notes_freqs(sorted_notes_freqs):
-    #     with open('output/frequency_by_notes.txt', 'w') as file:
-    #         for pair in sorted_notes_freqs:
-    #             file.write(str(pair) + "\n")
-
-    # @staticmethod
-    # def write_notes_bigrams_freqs(sorted_notes_bigrams_freqs):
-    #     with open('output/frequency_by_notes_bigrams.txt', 'w') as file:
-    #         for pair in sorted_notes_bigrams_freqs:
-    #             file.write(str(pair) + "\n")
-
-    # @staticmethod
-    # def write_notes_trigrams_freqs(sorted_notes_trigrams_freqs):
-    #     with open('output/frequency_by_notes_trigrams.txt', 'w') as file:
-    #         for pair in sorted_notes_trigrams_freqs:
-    #             file.write(str(pair) + "\n")
-    
-    # @staticmethod
-    # def write_reason_freqs(sorted_reason_freqs):
-    #     with open('output/frequency_by_client_reason.txt', 'w') as file:
-    #         for pair in sorted_reason_freqs:
-    #             file.write(str(pair) + "\n")
 
     @staticmethod
     def get_custom_stopwords():

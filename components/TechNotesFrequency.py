@@ -7,13 +7,13 @@ from components.FrequencyBase import FrequencyBase
 
 
 class TechNotesFrequency(FrequencyBase):
+    
     def __init__(self):
         self.notes = None
         self.sorted_notes_freqs = None
         self.default_stopwords = None
         self.bigrams_fdist = None
         self.sorted_bigrams = None
-
         self.add_custom_stopwords()
 
 
@@ -49,7 +49,6 @@ class TechNotesFrequency(FrequencyBase):
         notes_alpha2 = [n for n in notes_alpha if n not in self.default_stopwords]
 
         self.notes = notes_alpha2
-        # print(self.notes)
 
 
     def get_sorted_fdist(self):
@@ -99,15 +98,12 @@ class TechNotesFrequency(FrequencyBase):
         self.sorted_bigrams = mod_sorted_bigram_freqs       
 
 
-    def get_notes_trigrams(self):
-        trigrams = list(nltk.trigrams(self.notes))
-        trigrams_fdist = nltk.FreqDist(trigrams)
-        trigram_freqs = []
-        for k,v in trigrams_fdist.items():
-            trigram_freqs.append((k,v))
+    # TODO: deduplicate trigrams
+    # def get_notes_trigrams(self):
+    #     trigrams = list(nltk.trigrams(self.notes))
+    #     trigrams_fdist = nltk.FreqDist(trigrams)
+    #     trigram_freqs = []
+    #     for k,v in trigrams_fdist.items():
+    #         trigram_freqs.append((k,v))
 
-        sorted_trigram_freqs = sorted(trigram_freqs, key=lambda x: x[1], reverse=True)
-        # print(sorted_trigram_freqs)
-
-        from components.FileIO import FileIO
-        FileIO.write_notes_trigrams_freqs(sorted_trigram_freqs)
+    #     sorted_trigram_freqs = sorted(trigram_freqs, key=lambda x: x[1], reverse=True)
