@@ -18,6 +18,13 @@ If you would like to see graphs, add the "-plot" flag to the command.
 
 ### Information
 This program currently provides three metrics:
-1. VOH sessions per department (who are clients are)
+1. VOH sessions per department (who our clients are)
 2. Clients' reasons for coming to VOH (what their problems are)
 3. Bigrams of our solution notes (how we solve them)
+
+The plots summarize the most common data:
+
+![department](readme/department_usage.png)
+![reasons](readme/client_reasons.png)
+![solutions](readme/solution_bigrams.png)
+
