@@ -1,4 +1,4 @@
-from components.baseClasses.FrequencyBase import FrequencyBase
+from components.bases.FrequencyBase import FrequencyBase
 
 
 class DepartmentsFrequency(FrequencyBase):

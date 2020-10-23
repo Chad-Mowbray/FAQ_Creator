@@ -3,7 +3,7 @@ from nltk.corpus import stopwords
 import string
 import copy
 nltk.download('stopwords')
-from components.baseClasses.FrequencyBase import FrequencyBase
+from components.bases.FrequencyBase import FrequencyBase
 
 
 class TechNotesFrequency(FrequencyBase):
@@ -19,7 +19,7 @@ class TechNotesFrequency(FrequencyBase):
 
 
     def add_custom_stopwords(self):
-        from components.FileIO import FileIO
+        from components.helpers.FileIO import FileIO
         self.default_stopwords = nltk.corpus.stopwords.words('english')
         custom_stopwords = FileIO.get_custom_stopwords()
         self.default_stopwords.extend(custom_stopwords)   

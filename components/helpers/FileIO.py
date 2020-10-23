@@ -13,7 +13,7 @@ class FileIO:
 
 
     def read_raw_csv(self):
-        return pd.read_csv(f'input/{self.input_file}')
+        return pd.read_csv(f'files/input/{self.input_file}')
 
     
     def clean_df(self):
@@ -38,14 +38,14 @@ class FileIO:
 
     @staticmethod
     def write_file(data, filename):
-        with open(f'output/{filename}.txt', 'w') as file:
+        with open(f'files/output/{filename}.txt', 'w') as file:
             for pair in data:
                 file.write(str(pair) + "\n")
 
     @staticmethod
     def get_custom_stopwords():
         custom_stopwords = []
-        with open('utils/extra_stopwords.txt', 'r') as file:
+        with open('components/utils/extra_stopwords.txt', 'r') as file:
             for line in file.readlines():
                 custom_stopwords.append(line.strip('\n'))
         return custom_stopwords

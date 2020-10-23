@@ -1,9 +1,9 @@
-from components.FileIO import FileIO
-from components.DepartmentsFrequency import DepartmentsFrequency
-from components.ClientReasonsFrequency import ClientReasonsFrequency
-from components.TechNotesFrequency import TechNotesFrequency
-from components.Plotter import Plotter
-from components.baseClasses.RunnerBase import RunnerBase
+from components.helpers.FileIO import FileIO
+from components.processors.DepartmentsFrequency import DepartmentsFrequency
+from components.processors.ClientReasonsFrequency import ClientReasonsFrequency
+from components.processors.TechNotesFrequency import TechNotesFrequency
+from components.helpers.Plotter import Plotter
+from components.bases.RunnerBase import RunnerBase
 
 
 class Runner(RunnerBase):
@@ -22,22 +22,17 @@ class Runner(RunnerBase):
         self.df = df
 
 
-    def agent_notes(self):
-        print("processing agent notes info...")
-        notes = TechNotesFrequency(self.df)
-        notes.add_custom_stopwords()
-        notes.clean()
+    @staticmethod
+    def clean_helper(instance):
+        instance.add_custom_stopwords()
+        instance.clean()
 
-        notes.get_sorted_fdist()
-        notes.write_file(notes.sorted_freqs, "frequency_by_agent_notes")
-
-        notes.get_notes_bigrams()
-        notes.write_file(notes.sorted_bigrams, "frequency_by_agent_notes_bigrams")
-
-        # notes.get_notes_trigrams()  TODO: add deduplicated trigrams
-
+    
+    def bigram_helper(self, instance):
+        instance.get_notes_bigrams()
+        instance.write_file(instance.sorted_bigrams, "frequency_by_agent_notes_bigrams")
         if self.should_plot:
-            self.plot(notes.sorted_bigrams,"Common Bigrams in Technician Notes", "Bigram", display_number=10)
+            self.plot(instance.sorted_bigrams, "Common Bigrams in Technician Notes", "Bigram", display_number=10)
 
 
     @staticmethod
@@ -49,9 +44,9 @@ class Runner(RunnerBase):
 
     def main(self):
         self.get_df()
-        self.monogram("department", DepartmentsFrequency, "frequency_by_department", "VOH Usage by Department", "Department Name")
-        self.monogram("client reason", ClientReasonsFrequency, "frequency_by_client_reasons", "Clients' Reason for Visit", "Reason")
-        self.agent_notes()
+        self.ngram("department", DepartmentsFrequency, "frequency_by_department", "VOH Usage by Department", "Department Name")
+        self.ngram("client reason", ClientReasonsFrequency, "frequency_by_client_reasons", "Clients' Reason for Visit", "Reason")
+        self.ngram("agent notes", TechNotesFrequency, "frequency_by_agent_notes", "Agent Terms in VOH Notes", "Agent Terms", clean_helper=self.clean_helper, multigram=self.bigram_helper)
 
 
 if __name__ == "__main__":
@@ -64,7 +59,7 @@ if __name__ == "__main__":
     results = parser.parse_args()
 
     input_file, should_plot = results.input, results.plot
-    if input_file is None or input_file[-4:] != ".csv": raise Exception("You must provide an input csv file as an argument:  -input myFile.csv")
+    if input_file is None or input_file[-4:] != ".csv": raise Exception("You must provide an input csv file as an argument.  Example: python main.py -input myFile.csv")
 
     runner = Runner(input_file, should_plot)
     runner.main()

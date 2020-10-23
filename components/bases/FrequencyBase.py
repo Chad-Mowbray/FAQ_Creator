@@ -1,5 +1,5 @@
 import nltk
-from components.FileIO import FileIO
+from components.helpers.FileIO import FileIO
 
 
 class FrequencyBase:
