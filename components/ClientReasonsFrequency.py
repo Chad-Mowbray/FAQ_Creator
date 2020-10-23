@@ -1,11 +1,11 @@
-from components.FrequencyBase import FrequencyBase
+from components.baseClasses.FrequencyBase import FrequencyBase
 
 
 class ClientReasonsFrequency(FrequencyBase):
 
     def __init__(self, df):
         super().__init__(df)
-        self.sorted_reason_freqs = None
+        self.sorted_freqs = None
         self.get_data("reason")
 
 
@@ -45,4 +45,4 @@ class ClientReasonsFrequency(FrequencyBase):
         for k,v in sorted_reasons_dict.items():
             sorted_tuples.append((k,v))
 
-        self.sorted_reason_freqs = sorted_tuples
+        self.sorted_freqs = sorted_tuples

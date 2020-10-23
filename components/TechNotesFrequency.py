@@ -3,14 +3,14 @@ from nltk.corpus import stopwords
 import string
 import copy
 nltk.download('stopwords')
-from components.FrequencyBase import FrequencyBase
+from components.baseClasses.FrequencyBase import FrequencyBase
 
 
 class TechNotesFrequency(FrequencyBase):
     
     def __init__(self, df):
         super().__init__(df)
-        self.sorted_notes_freqs = None
+        self.sorted_freqs = None
         self.default_stopwords = None
         self.bigrams_fdist = None
         self.sorted_bigrams = None
@@ -47,19 +47,7 @@ class TechNotesFrequency(FrequencyBase):
 
         self.data = notes_alpha2
 
-
-    def get_sorted_fdist(self):
-        # run after self.clean
-        notes_fdist = nltk.FreqDist(self.data)
- 
-        notes_freqs = []
-        for k,v in notes_fdist.items():
-            notes_freqs.append((k,v))
-
-        sorted_notes_freqs = sorted(notes_freqs, key=lambda x: x[1], reverse=True)
-        self.sorted_notes_freqs = sorted_notes_freqs
         
-
     def get_notes_bigrams(self):
         # run after self.clean
         bigrams = list(nltk.bigrams(self.data))
