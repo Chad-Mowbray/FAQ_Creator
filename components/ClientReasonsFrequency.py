@@ -3,17 +3,14 @@ from components.FrequencyBase import FrequencyBase
 
 class ClientReasonsFrequency(FrequencyBase):
 
-    def __init__(self):
-        self.reasons = None
+    def __init__(self, df):
+        super().__init__(df)
         self.sorted_reason_freqs = None
-
-
-    def get_reasons(self, df):
-        self.reasons = [reason for reason in df["reason"].values if isinstance(reason, str)]
+        self.get_data("reason")
 
 
     def get_sorted_fdist(self):
-        if self.reasons == None: raise Exception("You must run get_reasons first")
+        if self.data == None: raise Exception("You must run get_reasons first")
         canvas = 'anvas'
         organize = 'rganiz'
         migration = 'igrat'
@@ -26,7 +23,7 @@ class ClientReasonsFrequency(FrequencyBase):
             "publish": 0
         }
 
-        for reason in self.reasons:
+        for reason in self.data:
             split_r = reason.split(",")
             for r in split_r:
                 if r.find(canvas) != -1:

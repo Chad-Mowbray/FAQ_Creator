@@ -4,18 +4,15 @@ from components.FrequencyBase import FrequencyBase
 
 class DepartmentsFrequency(FrequencyBase):
 
-    def __init__(self):
-        self.departments = None
+    def __init__(self, df):
+        super().__init__(df)
         self.sorted_dept_freqs = None
-
-
-    def get_departments(self, df):
-        self.departments = [dep for dep in df["department"].values if isinstance(dep, str)]
+        self.get_data("department")
 
 
     def get_sorted_fdist(self):
-        if self.departments is None: raise Exception("You must run get_departments first")
-        fdist = nltk.FreqDist(self.departments)
+        if self.data is None: raise Exception("You must run get_departments first")
+        fdist = nltk.FreqDist(self.data)
 
         department_freqs = []
         for k,v in fdist.items():

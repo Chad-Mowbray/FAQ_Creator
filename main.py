@@ -22,8 +22,8 @@ class Runner:
 
     def departments(self):
         print("processing department info...")
-        deps = DepartmentsFrequency()
-        deps.get_departments(self.df)
+        deps = DepartmentsFrequency(self.df)
+        # deps.get_data(self.df)
         deps.get_sorted_fdist()
         deps.write_file(deps.sorted_dept_freqs, "frequency_by_department")
 
@@ -33,8 +33,8 @@ class Runner:
 
     def client_reasons(self):
         print("processing client reason info...")
-        reasons = ClientReasonsFrequency()
-        reasons.get_reasons(self.df)
+        reasons = ClientReasonsFrequency(self.df)
+        # reasons.get_data(self.df)
         reasons.get_sorted_fdist()
         reasons.write_file(reasons.sorted_reason_freqs, "frequency_by_client_reasons")
         
@@ -44,8 +44,8 @@ class Runner:
 
     def agent_notes(self):
         print("processing agent notes info...")
-        notes = TechNotesFrequency()
-        notes.get_notes(self.df)
+        notes = TechNotesFrequency(self.df)
+        # notes.get_data(self.df)
         notes.add_custom_stopwords()
         notes.clean()
 
