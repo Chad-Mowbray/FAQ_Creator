@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 class Plotter:
 
-    def __init__(self, data, title, x_label, y_label="Frequency", display_number=5):
+    def __init__(self, data, title, x_label, y_label="Frequency", display_number=10):
         self.data = data
         self.title = title
         self.x_label = x_label
