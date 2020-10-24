@@ -2,7 +2,7 @@ class RunnerBase:
 
     def ngram(self, category, Cls, filename, x_label, y_label, clean_helper=None, multigram=None):
         print(f"processing {category} info...")
-        instance = Cls(self.df)
+        instance = Cls(self._df)
 
         if clean_helper: clean_helper(instance)
 
@@ -12,4 +12,4 @@ class RunnerBase:
         if multigram: multigram(instance)
 
         if self.should_plot:
-            self.plot(instance.sorted_freqs, x_label, y_label)
+            self._plot(instance.sorted_freqs, x_label, y_label)

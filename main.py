@@ -9,17 +9,17 @@ from components.bases.RunnerBase import RunnerBase
 class Runner(RunnerBase):
 
     def __init__(self, input_file, should_plot):
-        self.input_file = input_file
+        self._input_file = input_file
         self.should_plot = should_plot
-        self.df = None
+        self._df = None
 
 
-    def get_df(self):
+    def _get_df(self):
         print("getting df...")
-        file_reader = FileIO(self.input_file)
+        file_reader = FileIO(self._input_file)
         file_reader.clean_df()
         df = file_reader.df
-        self.df = df
+        self._df = df
 
 
     @staticmethod
@@ -32,18 +32,18 @@ class Runner(RunnerBase):
         instance.get_notes_bigrams()
         instance.write_file(instance.sorted_bigrams, "frequency_by_agent_notes_bigrams")
         if self.should_plot:
-            self.plot(instance.sorted_bigrams, "Common Bigrams in Technician Notes", "Bigram", display_number=10)
+            self._plot(instance.sorted_bigrams, "Common Bigrams in Technician Notes", "Bigram", display_number=10)
 
 
     @staticmethod
-    def plot(*args, **kwargs):
+    def _plot(*args, **kwargs):
         print("plotting...")
         p = Plotter(*args,**kwargs)
         p.plot()
 
 
     def main(self):
-        self.get_df()
+        self._get_df()
         self.ngram("department", DepartmentsFrequency, "frequency_by_department", "VOH Usage by Department", "Department Name")
         self.ngram("client reason", ClientReasonsFrequency, "frequency_by_client_reasons", "Clients' Reason for Visit", "Reason")
         self.ngram("agent notes", TechNotesFrequency, "frequency_by_agent_notes", "Agent Terms in VOH Notes", "Agent Terms", clean_helper=self.clean_helper, multigram=self.bigram_helper)

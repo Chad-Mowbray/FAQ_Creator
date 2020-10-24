@@ -10,7 +10,7 @@ class ClientReasonsFrequency(FrequencyBase):
 
 
     def get_sorted_fdist(self):
-        if self.data == None: raise Exception("You must run get_reasons first")
+        if self._data == None: raise Exception("You must run get_reasons first")
         canvas = 'anvas'
         organize = 'rganiz'
         migration = 'igrat'
@@ -23,7 +23,7 @@ class ClientReasonsFrequency(FrequencyBase):
             "publish": 0
         }
 
-        for reason in self.data:
+        for reason in self._data:
             split_r = reason.split(",")
             for r in split_r:
                 if r.find(canvas) != -1:

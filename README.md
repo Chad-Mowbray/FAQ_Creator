@@ -17,7 +17,7 @@ This will produce four text files in the /output folder.
 If you would like to see graphs, add the "-plot" flag to the command.
 
 ### Information
-This program currently provides three metrics:
+This program currently provides four metrics:
 1. VOH sessions per department (who our clients are)
 2. Clients' reasons for coming to VOH (what their problems are)
 3. Single word frequency of solution notes (how we solve them)

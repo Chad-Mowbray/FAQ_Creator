@@ -11,7 +11,7 @@ class TechNotesFrequency(FrequencyBase):
     def __init__(self, df):
         super().__init__(df)
         self.sorted_freqs = None
-        self.default_stopwords = None
+        self._default_stopwords = None
         self.bigrams_fdist = None
         self.sorted_bigrams = None
         self.add_custom_stopwords()
@@ -20,14 +20,14 @@ class TechNotesFrequency(FrequencyBase):
 
     def add_custom_stopwords(self):
         from components.helpers.FileIO import FileIO
-        self.default_stopwords = nltk.corpus.stopwords.words('english')
+        self._default_stopwords = nltk.corpus.stopwords.words('english')
         custom_stopwords = FileIO.get_custom_stopwords()
-        self.default_stopwords.extend(custom_stopwords)   
+        self._default_stopwords.extend(custom_stopwords)   
 
 
     def clean(self):
         # remove stopwords
-        notes_stopwords = [n if n not in self.default_stopwords else '' for note in self.data for n in note.split(' ') ]
+        notes_stopwords = [n if n not in self._default_stopwords else '' for note in self._data for n in note.split(' ') ]
 
         # make lowercase
         notes_lower = [n.lower() for n in notes_stopwords]
@@ -43,14 +43,14 @@ class TechNotesFrequency(FrequencyBase):
         notes_alpha = [n for n in stripped if n.isalpha()]
 
         # remove stopwords again
-        notes_alpha2 = [n for n in notes_alpha if n not in self.default_stopwords]
+        notes_alpha2 = [n for n in notes_alpha if n not in self._default_stopwords]
 
-        self.data = notes_alpha2
+        self._data = notes_alpha2
 
         
     def get_notes_bigrams(self):
         # run after self.clean
-        bigrams = list(nltk.bigrams(self.data))
+        bigrams = list(nltk.bigrams(self._data))
         bigrams_fdist = nltk.FreqDist(bigrams)
         bigram_freqs = []
         for k,v in bigrams_fdist.items():
@@ -85,7 +85,7 @@ class TechNotesFrequency(FrequencyBase):
 
     # TODO: deduplicate trigrams
     # def get_notes_trigrams(self):
-    #     trigrams = list(nltk.trigrams(self.data))
+    #     trigrams = list(nltk.trigrams(self._data))
     #     trigrams_fdist = nltk.FreqDist(trigrams)
     #     trigram_freqs = []
     #     for k,v in trigrams_fdist.items():

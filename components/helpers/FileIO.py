@@ -3,8 +3,8 @@ import pandas as pd
 
 class FileIO:
     def __init__(self, filename):
-        self.input_file = filename
-        self.df = self.read_raw_csv()
+        self._input_file = filename
+        self.df = self._read_raw_csv()
 
     def __new__(cls, *args, **kwargs):
         if not hasattr(cls, 'instance'):
@@ -12,8 +12,8 @@ class FileIO:
         return cls.instance
 
 
-    def read_raw_csv(self):
-        return pd.read_csv(f'files/input/{self.input_file}')
+    def _read_raw_csv(self):
+        return pd.read_csv(f'files/input/{self._input_file}')
 
     
     def clean_df(self):

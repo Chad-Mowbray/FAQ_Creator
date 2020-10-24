@@ -5,19 +5,19 @@ from components.helpers.FileIO import FileIO
 class FrequencyBase:
 
     def __init__(self, df):
-        self.data = None
-        self.df = df
+        self._data = None
+        self._df = df
 
     def write_file(self, data, filename):
         if data is None: raise Exception("You can't write to file yet")
         FileIO.write_file(data, filename)
 
     def get_data(self, column):
-        self.data = [x for x in self.df[f"{column}"].values if isinstance(x, str)]
+        self._data = [x for x in self._df[f"{column}"].values if isinstance(x, str)]
 
     def get_sorted_fdist(self):
-        if self.data is None: raise Exception("You must run get_data first")
-        fdist = nltk.FreqDist(self.data)
+        if self._data is None: raise Exception("You must run get_data first")
+        fdist = nltk.FreqDist(self._data)
 
         freqs = []
         for k,v in fdist.items():
