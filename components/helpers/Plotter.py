@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from .Logger import Logger
 
 
 class Plotter:
@@ -13,13 +14,17 @@ class Plotter:
 
 
     def plot(self):
-        x = [str(x[0][:self.label_max_len]) for x in self.data[:self.display_number]]
-        y = [x[1] for x in self.data[:self.display_number]]
+        try:
+            x = [str(x[0][:self.label_max_len]) for x in self.data[:self.display_number]]
+            y = [x[1] for x in self.data[:self.display_number]]
 
-        plt.bar(x,y,align='center')
-        plt.title(self.title)
-        plt.xlabel(self.x_label)
-        plt.ylabel(self.y_label)
-        # for i in range(len(y)):    # add a horizontal line for easier comparison
-        #     plt.hlines(y[i],0,x[i]) 
-        plt.show()
+            plt.bar(x,y,align='center')
+            plt.title(self.title)
+            plt.xlabel(self.x_label)
+            plt.ylabel(self.y_label)
+            # for i in range(len(y)):    # add a horizontal line for easier comparison
+            #     plt.hlines(y[i],0,x[i]) 
+            plt.show()
+        except:
+            Logger.log_message(Logger.ERROR, f"Failed to plot graph for {self.title}")
+

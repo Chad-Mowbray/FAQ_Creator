@@ -4,6 +4,8 @@ from components.processors.ClientReasonsFrequency import ClientReasonsFrequency
 from components.processors.TechNotesFrequency import TechNotesFrequency
 from components.helpers.Plotter import Plotter
 from components.bases.RunnerBase import RunnerBase
+from components.helpers.Logger import Logger
+import sys
 
 
 class Runner(RunnerBase):
@@ -15,7 +17,7 @@ class Runner(RunnerBase):
 
 
     def _get_df(self):
-        print("getting df...")
+        Logger.log_message(Logger.INFO, f"Getting dataframe")
         file_reader = FileIO(self._input_file)
         file_reader.clean_df()
         df = file_reader.df
@@ -37,7 +39,7 @@ class Runner(RunnerBase):
 
     @staticmethod
     def _plot(*args, **kwargs):
-        print("plotting...")
+        Logger.log_message(Logger.INFO, f"Plotting results for {args[1]} ")
         p = Plotter(*args,**kwargs)
         p.plot()
 
@@ -50,7 +52,7 @@ class Runner(RunnerBase):
 
 
 if __name__ == "__main__":
-    print('starting.....')
+    Logger.log_message(Logger.INFO, f"Starting FAQ creator...")
 
     import argparse
     parser = argparse.ArgumentParser()
@@ -59,7 +61,9 @@ if __name__ == "__main__":
     results = parser.parse_args()
 
     input_file, should_plot = results.input, results.plot
-    if input_file is None or input_file[-4:] != ".csv": raise Exception("You must provide an input csv file as an argument.  Example: python main.py -input myFile.csv")
+    if input_file is None or input_file[-4:] != ".csv": 
+        Logger.log_message(Logger.ERROR, "You must provide an input csv file as an argument.  Example: python main.py -input myFile.csv")
+        sys.exit(1)
 
     runner = Runner(input_file, should_plot)
     runner.main()

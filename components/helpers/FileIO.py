@@ -1,7 +1,10 @@
 import pandas as pd
+from .Logger import Logger
+import sys
 
 
 class FileIO:
+    
     def __init__(self, filename):
         self._input_file = filename
         self.df = self._read_raw_csv()
@@ -13,9 +16,13 @@ class FileIO:
 
 
     def _read_raw_csv(self):
-        return pd.read_csv(f'files/input/{self._input_file}')
+        try: 
+            return pd.read_csv(f'files/input/{self._input_file}')
+        except:
+            Logger.log_message(Logger.ERROR, f"Failed to convert csv file {self._input_file} to dataframe")
+            sys.exit(1)
+        
 
-    
     def clean_df(self):
         self.df.rename(columns={
                         "Title": "date",
@@ -38,14 +45,24 @@ class FileIO:
 
     @staticmethod
     def write_file(data, filename):
-        with open(f'files/output/{filename}.txt', 'w') as file:
-            for pair in data:
-                file.write(str(pair) + "\n")
+        try:
+            with open(f'files/output/{filename}.txt', 'w') as file:
+                for pair in data:
+                    file.write(str(pair) + "\n")
+        except:
+            Logger.log_message(Logger.ERROR, f"Failed to write file {filename} to output directory")
+
 
     @staticmethod
     def get_custom_stopwords():
-        custom_stopwords = []
-        with open('components/utils/extra_stopwords.txt', 'r') as file:
-            for line in file.readlines():
-                custom_stopwords.append(line.strip('\n'))
-        return custom_stopwords
+        try:
+            custom_stopwords = []
+            with open('components/utils/extra_stopwords.txt', 'r') as file:
+                for line in file.readlines():
+                    custom_stopwords.append(line.strip('\n'))
+
+            assert len(custom_stopwords) > 0
+            return custom_stopwords
+        except:
+            Logger.log_message(Logger.ERROR, f"Failed to read custom stopwords")
+            sys.exit(1)
