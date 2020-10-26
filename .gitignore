@@ -2,9 +2,5 @@ venv
 .ipynb_checkpoints
 __pycache__
 
-output
-input
-!output/.gitkeep 
-!input/.gitkeep 
-
 frequency*
+VOH_*
