@@ -2,7 +2,7 @@ from components.helpers.Logger import Logger
 
 class RunnerBase:
 
-    def ngram(self, category, Cls, filename, x_label, y_label, clean_helper=None, multigram=None):
+    def ngram(self, category, Cls, filename, x_label, y_label, quick_run=False, clean_helper=None, multigram=None):
 
         Logger.log_message(Logger.INFO, f"Processing {category} ngram")
 
@@ -17,7 +17,7 @@ class RunnerBase:
             if multigram: multigram(instance)
 
             if self.should_plot:
-                self._plot(instance.sorted_freqs, x_label, y_label)
+                self._plot(instance.sorted_freqs, x_label, y_label, quick_run)
 
         except:
             Logger.log_message(Logger.ERROR, f"Failed to generate ngram for {category}")

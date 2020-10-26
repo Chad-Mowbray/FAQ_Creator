@@ -45,6 +45,7 @@ class FileIO:
 
     @staticmethod
     def write_file(data, filename):
+        Logger.log_message(Logger.INFO, f"Writing file {filename}")
         try:
             with open(f'files/output/{filename}.txt', 'w') as file:
                 for pair in data:
