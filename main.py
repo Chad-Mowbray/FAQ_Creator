@@ -65,7 +65,7 @@ if __name__ == "__main__":
     input_file, should_plot, quick_run = results.input, results.plot, results.quick
 
     if quick_run:
-        runner = Runner("VOH_CSV.csv", True, quick_run)
+        runner = Runner("test_VOH_CSV.csv", True, quick_run)
         runner.main()
 
     else:     
