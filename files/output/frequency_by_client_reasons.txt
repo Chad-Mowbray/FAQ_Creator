@@ -1,4 +1,0 @@
-('organizing', 8)
-('canvas', 6)
-('migration', 1)
-('publish', 1)
