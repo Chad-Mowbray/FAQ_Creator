@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/Chad-Mowbray/FAQ_Creator.svg?branch=master)](https://travis-ci.com/Chad-Mowbray/FAQ_Creator)
+
 ### Purpose
 This is a tool for providing an overview of who our clients are, what their problems are, and how we solve them.
 
