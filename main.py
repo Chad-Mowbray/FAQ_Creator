@@ -2,6 +2,7 @@ from components.helpers.FileIO import FileIO
 from components.processors.DepartmentsFrequency import DepartmentsFrequency
 from components.processors.ClientReasonsFrequency import ClientReasonsFrequency
 from components.processors.TechNotesFrequency import TechNotesFrequency
+from components.processors.TechReasonsFrequency import TechReasonsFrequency
 from components.helpers.Plotter import Plotter
 from components.bases.RunnerBase import RunnerBase
 from components.helpers.Logger import Logger
@@ -47,6 +48,8 @@ class Runner(RunnerBase):
 
     def main(self):
         self._get_df()
+        # self.ngram("tech reasons", TechReasonsFrequency, "frequency_by_tech", "Tech Reasons Freq", "Reason for visit", quick_run=self.quick_run)
+
         self.ngram("department", DepartmentsFrequency, "frequency_by_department", "VOH Usage by Department", "Department Name", quick_run=self.quick_run)
         self.ngram("client reason", ClientReasonsFrequency, "frequency_by_client_reasons", "Clients' Reason for Visit", "Reason", quick_run=self.quick_run)
         self.ngram("agent notes", TechNotesFrequency, "frequency_by_agent_notes", "Agent Terms in VOH Notes", "Agent Terms", quick_run=self.quick_run, clean_helper=self.clean_helper, multigram=self.bigram_helper)
