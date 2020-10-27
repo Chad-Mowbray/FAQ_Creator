@@ -21,7 +21,7 @@ If you would like to see graphs, add the "-plot" flag to the command.
 ### Information
 This program currently provides four metrics:
 1. VOH sessions per department (who our clients are)
-2. Clients' reasons for coming to VOH (what their problems are)
+2. Clients' reasons for coming to VOH, according to Technicians (what their problems are)
 3. Single word frequency of solution notes (how we solve them)
 4. Bigrams of our solution notes (how we solve them)
 
