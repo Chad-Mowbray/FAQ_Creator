@@ -1,8 +1,8 @@
-import nltk
+from nltk import FreqDist, bigrams, download
 from nltk.corpus import stopwords
 import string
 import copy
-nltk.download('stopwords')
+download('stopwords')
 from components.bases.FrequencyBase import FrequencyBase
 
 
@@ -20,7 +20,7 @@ class TechNotesFrequency(FrequencyBase):
 
     def add_custom_stopwords(self):
         from components.helpers.FileIO import FileIO
-        self._default_stopwords = nltk.corpus.stopwords.words('english')
+        self._default_stopwords = stopwords.words('english')
         custom_stopwords = FileIO.get_custom_stopwords()
         self._default_stopwords.extend(custom_stopwords)   
 
@@ -50,8 +50,8 @@ class TechNotesFrequency(FrequencyBase):
         
     def get_notes_bigrams(self):
         # run after self.clean
-        bigrams = list(nltk.bigrams(self._data))
-        bigrams_fdist = nltk.FreqDist(bigrams)
+        bigrams_list = list(bigrams(self._data))
+        bigrams_fdist = FreqDist(bigrams_list)
         bigram_freqs = []
         for k,v in bigrams_fdist.items():
             bigram_freqs.append((k,v))

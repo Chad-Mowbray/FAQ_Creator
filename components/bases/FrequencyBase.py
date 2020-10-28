@@ -1,4 +1,4 @@
-import nltk
+from nltk import FreqDist
 from components.helpers.FileIO import FileIO
 
 
@@ -17,7 +17,7 @@ class FrequencyBase:
 
     def get_sorted_fdist(self):
         if self._data is None: raise Exception("You must run get_data first")
-        fdist = nltk.FreqDist(self._data)
+        fdist = FreqDist(self._data)
 
         freqs = []
         for k,v in fdist.items():
