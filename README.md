@@ -19,11 +19,12 @@ This will produce four text files in the /output folder.
 If you would like to see graphs, add the "-plot" flag to the command.
 
 ### Information
-This program currently provides four metrics:
+This program currently provides five metrics:
 1. VOH sessions per department (who our clients are)
 2. Clients' reasons for coming to VOH, according to Technicians (what their problems are)
 3. Single word frequency of solution notes (how we solve them)
 4. Bigrams of our solution notes (how we solve them)
+5. Trigrams of our solution notes (how we solve them)
 
 The plots summarize the most common data:
 
@@ -31,4 +32,5 @@ The plots summarize the most common data:
 ![reasons](readme/client_reasons.png)
 ![monograms](readme/agent_terms.png)
 ![bigrams](readme/solution_bigrams.png)
+![trigrams](readme/solution_trigrams.png)
 
