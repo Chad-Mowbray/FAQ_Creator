@@ -55,7 +55,6 @@ class Runner(RunnerBase):
         self.ngram("Visit Type Category", TechReasonsFrequency, "frequency_by_technician_categorization", "Reason for Visit According to Technician", "Category", quick_run=self.quick_run)
         self.ngram("Department", DepartmentsFrequency, "frequency_by_department", "VOH Usage by Department", "Department Name", quick_run=self.quick_run)
         self.ngram("Technician Notes", TechNotesFrequency, "frequency_by_technician_notes", "Technician's Terms Found in VOH Notes", "Technician Terms", quick_run=self.quick_run, clean_helper=self.clean_helper, bigram=self.bigram_helper, trigram=self.trigram_helper)
-        # self.ngram("Technician Notes Trigrams", TechNotesFrequency, "frequency_by_technician_notes_trigrams", "Technician's Terms Found in VOH Notes", "Technician Terms Trigrams", quick_run=self.quick_run, clean_helper=self.clean_helper, multigram=self.trigram_helper)
 
 
 

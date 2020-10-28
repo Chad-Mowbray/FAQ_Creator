@@ -88,8 +88,9 @@ class TechNotesFrequency(FrequencyBase):
         self.sorted_bigrams = mod_sorted_bigram_freqs       
 
 
-    # TODO: deduplicate trigrams
     def get_notes_trigrams(self):
+        FALSE_HITS = [('virtual', 'office', 'hours')]
+
         trigrams_list = list(trigrams(self._data))
         trigrams_fdist = FreqDist(trigrams_list)
         trigram_freqs = []
@@ -136,12 +137,11 @@ class TechNotesFrequency(FrequencyBase):
         for k,v in copy_dict.items():
             mod_trigram_freqs.append((k,v))
 
-        # TODO: filter out useless values
-        # FALSE_HITS = [('virtual', 'office', 'hours')]
-        # for hit in FALSE_HITS:
-        #     if hit in mod_trigram_freqs: mod_trigram_freqs.remove(hit)
+        for item in mod_trigram_freqs:
+            if item[0] in FALSE_HITS: mod_trigram_freqs.remove(item)
 
         mod_sorted_trigram_freqs = sorted(mod_trigram_freqs, key=lambda x: x[1], reverse=True)
+        print(mod_trigram_freqs[0])
         self.sorted_trigrams = mod_sorted_trigram_freqs  
 
 
