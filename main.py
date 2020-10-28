@@ -37,6 +37,11 @@ class Runner(RunnerBase):
         if self.should_plot:
             self._plot(instance.sorted_bigrams, "Common Bigrams in Technician Notes", "Bigram", quick_run=self.quick_run, display_number=10)
 
+    def trigram_helper(self, instance):
+        instance.get_notes_trigrams()
+        instance.write_file(instance.sorted_trigrams, "frequency_by_technician_notes_trigrams")
+        if self.should_plot:
+            self._plot(instance.sorted_trigrams, "Common Trigrams in Technician Notes", "Trigram", quick_run=self.quick_run, display_number=5)        
 
     @staticmethod
     def _plot(*args, **kwargs):
@@ -49,7 +54,9 @@ class Runner(RunnerBase):
         self._get_df()
         self.ngram("Visit Type Category", TechReasonsFrequency, "frequency_by_technician_categorization", "Reason for Visit According to Technician", "Category", quick_run=self.quick_run)
         self.ngram("Department", DepartmentsFrequency, "frequency_by_department", "VOH Usage by Department", "Department Name", quick_run=self.quick_run)
-        self.ngram("Technician Notes", TechNotesFrequency, "frequency_by_technician_notes", "Technician's Terms Found in VOH Notes", "Technician Terms", quick_run=self.quick_run, clean_helper=self.clean_helper, multigram=self.bigram_helper)
+        self.ngram("Technician Notes", TechNotesFrequency, "frequency_by_technician_notes", "Technician's Terms Found in VOH Notes", "Technician Terms", quick_run=self.quick_run, clean_helper=self.clean_helper, bigram=self.bigram_helper, trigram=self.trigram_helper)
+        # self.ngram("Technician Notes Trigrams", TechNotesFrequency, "frequency_by_technician_notes_trigrams", "Technician's Terms Found in VOH Notes", "Technician Terms Trigrams", quick_run=self.quick_run, clean_helper=self.clean_helper, multigram=self.trigram_helper)
+
 
 
 if __name__ == "__main__":
