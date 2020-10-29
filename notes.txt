@@ -1,0 +1,9 @@
+
+Big Ideas:
+-Create a GUI using tkinter
+-Use some visualization library (D3) and put online
+
+
+TODOs:
+-Make df it's own component
+-Do something about messy ngram method

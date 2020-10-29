@@ -1,11 +1,12 @@
 from components.helpers.Logger import Logger
 
+
 class RunnerBase:
     """
     Provides the base class for the Runner
     """
     def __init__(self):
-        self._df = None
+        self._df = None  # TODO: this should probably be made into it's own class too, could potentially help with redundant processing
         self.should_plot = False
 
 
@@ -13,7 +14,7 @@ class RunnerBase:
     def _plot():
         pass
 
-
+# TODO: probably pull this out into its own component, probably mixin
     def ngram(
         self,
         category,
