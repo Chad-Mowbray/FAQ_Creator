@@ -24,3 +24,10 @@ script:
         then echo "linter failed" && exit 1; 
         else echo "linter passed"; 
     fi;
+  - |
+    FOLDER="$PWD/files/output"
+    NUM_FILES=`ls -1 $FOLDER | wc -l`
+    if [ "$NUM_FILES" -lt 5 ];
+        then echo "Generated files don't exist" && exit 1;
+        else echo "Generated files exist";
+    fi;
