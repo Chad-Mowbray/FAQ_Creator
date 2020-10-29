@@ -10,6 +10,7 @@ class FrequencyBase:
     def __init__(self, df):
         self._data = None
         self._df = df
+        self.sorted_freqs = None
 
     @staticmethod
     def write_file(data, filename):

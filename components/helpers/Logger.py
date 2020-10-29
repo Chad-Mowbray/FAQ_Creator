@@ -1,13 +1,16 @@
 import logging
 
 logging.basicConfig(
-    format='%(asctime)s: %(levelname)s: %(message)s', 
+    format='%(asctime)s: %(levelname)s: %(message)s',
     level=logging.INFO,
     datefmt='%H:%M:%S'
     )
 
 
 class Logger():
+    """
+    Controls basic logging
+    """
 
     INFO = logging.INFO
     WARN = logging.WARN

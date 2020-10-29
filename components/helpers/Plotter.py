@@ -3,6 +3,9 @@ from .Logger import Logger
 
 
 class Plotter:
+    """
+    Plots given data
+    """
 
     def __init__(self, data, title, x_label, quick_run, y_label="Frequency", display_number=10):
         self.data = data
@@ -24,7 +27,7 @@ class Plotter:
             plt.xlabel(self.x_label)
             plt.ylabel(self.y_label)
             # for i in range(len(y)):    # add a horizontal line for easier comparison
-            #     plt.hlines(y[i],0,x[i]) 
+            #     plt.hlines(y[i],0,x[i])
             if self.quick_run:
                 plt.show(block=False)
                 plt.pause(1)
@@ -33,4 +36,3 @@ class Plotter:
                 plt.show()
         except:
             Logger.log_message(Logger.ERROR, f"Failed to plot graph for {self.title}")
-

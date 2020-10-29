@@ -1,16 +1,19 @@
-from nltk import download
-from nltk.corpus import stopwords
 import string
-import copy
-import itertools
-download('stopwords')
 from components.bases.FrequencyBase import FrequencyBase
 from components.mixins.BigramsMixin import BigramsMixin
 from components.mixins.TrigramsMixin import TrigramsMixin
+from components.helpers.FileIO import FileIO
+from nltk import download
+from nltk.corpus import stopwords
+download('stopwords')
+
 
 
 class TechNotesFrequency(FrequencyBase, BigramsMixin, TrigramsMixin):
-    
+    """
+    Process data related to technician's notes
+    """
+
     def __init__(self, df):
         super().__init__(df)
         self.sorted_freqs = None
@@ -26,10 +29,9 @@ class TechNotesFrequency(FrequencyBase, BigramsMixin, TrigramsMixin):
 
 
     def add_custom_stopwords(self):
-        from components.helpers.FileIO import FileIO
         self._default_stopwords = stopwords.words('english')
         custom_stopwords = FileIO.get_custom_stopwords()
-        self._default_stopwords.extend(custom_stopwords)   
+        self._default_stopwords.extend(custom_stopwords)
 
 
     def clean(self):

@@ -1,12 +1,20 @@
+import sys
 import pandas as pd
 from .Logger import Logger
-import sys
+
 
 
 class FileIO:
+    """
+    Reads from input csv and custom stopwords list
+    Converts to dataframe
+    Renames columns
+    Cleans dates
+    writes files
+    """
 
     START_DATE = "03/16/2020"
-    
+
     def __init__(self, filename):
         self._input_file = filename
         self.df = self._read_raw_csv()
@@ -18,12 +26,15 @@ class FileIO:
 
 
     def _read_raw_csv(self):
-        try: 
+        try:
             return pd.read_csv(f'files/input/{self._input_file}')
         except:
-            Logger.log_message(Logger.ERROR, f"Failed to convert csv file {self._input_file} to dataframe")
+            Logger.log_message(
+                Logger.ERROR,
+                f"Failed to convert csv file {self._input_file} to dataframe"
+                )
             sys.exit(1)
-        
+
 
     def clean_df(self):
         self.df.rename(columns={
@@ -104,5 +115,5 @@ class FileIO:
             assert len(custom_stopwords) > 0
             return custom_stopwords
         except:
-            Logger.log_message(Logger.ERROR, f"Failed to read custom stopwords")
+            Logger.log_message(Logger.ERROR, "Failed to read custom stopwords")
             sys.exit(1)

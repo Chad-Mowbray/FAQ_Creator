@@ -2,6 +2,9 @@ from nltk import FreqDist, bigrams
 
 
 class BigramsMixin:
+    """
+    A mixin to handle bigram processing
+    """
 
     def get_notes_bigrams(self):
         # run after self.clean
@@ -21,12 +24,12 @@ class BigramsMixin:
                 temp_dict[bigram[0]] = int(bigram[1])
 
         dict_copy = {}
-        for key in temp_dict.keys():
+        for key in temp_dict:
             if key not in dict_copy:
                 dict_copy[key] = temp_dict[key]
 
-            for k in temp_dict.keys():
-                if (k[1],k[0]) == key: 
+            for k in temp_dict:
+                if (k[1],k[0]) == key:
                     dict_copy[key] += temp_dict[(k[0],k[1])]
                     del dict_copy[key]
 
@@ -35,4 +38,4 @@ class BigramsMixin:
             mod_bigram_freqs.append((k,v))
 
         mod_sorted_bigram_freqs = sorted(mod_bigram_freqs, key=lambda x: x[1], reverse=True)
-        self.sorted_bigrams = mod_sorted_bigram_freqs       
+        self.sorted_bigrams = mod_sorted_bigram_freqs

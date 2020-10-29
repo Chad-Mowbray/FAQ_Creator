@@ -1,9 +1,11 @@
-from nltk import FreqDist, trigrams
-import copy
 import itertools
+from nltk import FreqDist, trigrams
 
 
 class TrigramsMixin:
+    """
+    A mixin to handle bigram processing
+    """
 
     FALSE_HITS = [('virtual', 'office', 'hours')]
 
@@ -25,7 +27,6 @@ class TrigramsMixin:
                 temp_dict[trigram[0]] = int(trigram[1])
 
         new_dict = {}
-        to_delete = []
 
         # There has to be a better way...
         for i,first in enumerate(temp_dict):
@@ -59,4 +60,4 @@ class TrigramsMixin:
             if item[0] in self.FALSE_HITS: mod_trigram_freqs.remove(item)
 
         mod_sorted_trigram_freqs = sorted(mod_trigram_freqs, key=lambda x: x[1], reverse=True)
-        self.sorted_trigrams = mod_sorted_trigram_freqs  
+        self.sorted_trigrams = mod_sorted_trigram_freqs

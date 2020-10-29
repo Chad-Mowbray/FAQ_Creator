@@ -2,6 +2,9 @@ from components.bases.FrequencyBase import FrequencyBase
 
 
 class TechReasonsFrequency(FrequencyBase):
+    """
+    Process data related to technician's stated reason for client visit
+    """
 
     def __init__(self, df):
         super().__init__(df)
@@ -11,7 +14,7 @@ class TechReasonsFrequency(FrequencyBase):
 
     def get_sorted_fdist(self):
 
-        if self._data == None: raise Exception("You must run get_data first")
+        if self._data is None: raise Exception("You must run get_data first")
 
         cleaned_data = []
         for line in self._data:
@@ -29,12 +32,12 @@ class TechReasonsFrequency(FrequencyBase):
                 topic_dict[topic] += 1
 
         topic_dict.pop(" etc.)", None)
-       
+
         sorted_topics_dict = {}
         srt = sorted(topic_dict.items(), key=lambda x : x[1], reverse=True)
         for pair in srt:
             sorted_topics_dict[pair[0]] = pair[1]
-        
+
         sorted_tuples = []
         for k,v in sorted_topics_dict.items():
             sorted_tuples.append((k,v))
