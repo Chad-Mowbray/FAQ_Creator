@@ -7,4 +7,14 @@ install:
 
 script:
   - python main.py -quick || exit 1
-  - linterrating=`pylint components/ --disable=C0103 --disable=C0321 --disable=C0116 --disable=C0114 --disable=R0903 --disable=E0401 | grep 'rated at' | awk '{print $7}'` && num=${linterrating:0:1} && echo $num; if [ "$num" -lt 9 ]; then echo "linter failed" && exit 1; else echo "linter passed"; fi;
+  - |
+  linterrating=`pylint components/ \
+  --disable=C0103 --disable=C0321 --disable=C0116 --disable=C0114 --disable=R0903 --disable=E0401 \
+  | grep 'rated at'\
+  | awk '{print $7}'`\
+  && num=${linterrating:0:1} \
+  && echo "Linter score: " $linterrating; \
+  if [ "$num" -lt 9 ]; 
+      then echo "linter failed" && exit 1; 
+      else echo "linter passed"; 
+  fi;
