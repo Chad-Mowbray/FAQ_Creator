@@ -1,10 +1,10 @@
 import string
+from nltk import download
+from nltk.corpus import stopwords
 from components.bases.FrequencyBase import FrequencyBase
 from components.mixins.BigramsMixin import BigramsMixin
 from components.mixins.TrigramsMixin import TrigramsMixin
 from components.helpers.FileIO import FileIO
-from nltk import download
-from nltk.corpus import stopwords
 download('stopwords')
 
 
@@ -18,12 +18,6 @@ class TechNotesFrequency(FrequencyBase, BigramsMixin, TrigramsMixin):
         super().__init__(df)
         self.sorted_freqs = None
         self._default_stopwords = None
-        self.bigrams_fdist = None
-        self.sorted_bigrams = None
-
-        self.trigrams_fdist = None
-        self.sorted_trigrams = None
-
         self.add_custom_stopwords()
         self.get_data("notes")
 
@@ -36,7 +30,11 @@ class TechNotesFrequency(FrequencyBase, BigramsMixin, TrigramsMixin):
 
     def clean(self):
         # remove stopwords
-        notes_stopwords = [n if n not in self._default_stopwords else '' for note in self._data for n in note.split(' ') ]
+        notes_stopwords = [n
+                        if n not in self._default_stopwords
+                        else ''
+                        for note in self._data
+                        for n in note.split(' ')]
 
         # make lowercase
         notes_lower = [n.lower() for n in notes_stopwords]

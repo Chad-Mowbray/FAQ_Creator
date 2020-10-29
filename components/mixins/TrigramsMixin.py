@@ -9,6 +9,10 @@ class TrigramsMixin:
 
     FALSE_HITS = [('virtual', 'office', 'hours')]
 
+    def __init__(self):
+        self.trigrams_fdist = None
+        self.sorted_trigrams = None
+
     def get_notes_trigrams(self):
         # run after self.clean
         trigrams_list = list(trigrams(self._data))

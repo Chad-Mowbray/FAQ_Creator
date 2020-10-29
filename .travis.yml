@@ -6,7 +6,12 @@ install:
   - pip install -r requirements.txt
 
 script:
+  - START_TIME=`date +%s`
   - python main.py -quick || exit 1
+  - |
+    END_TIME=`date +%s`; 
+    RUNTIME=$((END_TIME - START_TIME)); 
+    echo "Program ran in: " $RUNTIME " seconds"
   - >
     linterrating=`pylint 
     components/ 

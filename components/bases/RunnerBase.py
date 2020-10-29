@@ -1,14 +1,13 @@
-from components.helpers.Logger import Logger
 from components.helpers.NGramProcessor import NGramProcessor
-from components.helpers.DataFrameCreator import DataFrameCreator
+from components.helpers.FileIO import FileIO
 
-class RunnerBase(NGramProcessor, DataFrameCreator):
+class RunnerBase(NGramProcessor, FileIO):
     """
     Provides the base class for the Runner
     """
+
     def __init__(self):
-        self._df = None  # TODO: this should probably be made into it's own class too, could potentially help with redundant processing
-        self.should_plot = False
+        self._df = None
 
 
     @staticmethod

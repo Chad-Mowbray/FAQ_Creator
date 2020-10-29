@@ -1,10 +1,10 @@
-from components.helpers.FileIO import FileIO
 from components.processors.DepartmentsFrequency import DepartmentsFrequency
 from components.processors.TechNotesFrequency import TechNotesFrequency
 from components.processors.TechReasonsFrequency import TechReasonsFrequency
 from components.helpers.Plotter import Plotter
 from components.bases.RunnerBase import RunnerBase
 from components.helpers.Logger import Logger
+from components.helpers.DataFrameCreator import DataFrameCreator
 
 
 class Runner(RunnerBase):
@@ -18,13 +18,7 @@ class Runner(RunnerBase):
         self._input_file = input_file
         self.should_plot = should_plot
         self.quick_run = quick_run
-
-
-    # def _get_df(self):
-    #     Logger.log_message(Logger.INFO, "Getting dataframe")
-    #     file_reader = FileIO(self._input_file)
-    #     file_reader.clean_df()
-    #     self._df = file_reader.df
+        self._df = None
 
 
     @staticmethod
@@ -39,7 +33,8 @@ class Runner(RunnerBase):
 
 
     def main(self):
-        self._get_df()
+        data_frame = DataFrameCreator(self._input_file).df
+        self._df = data_frame
         self.ngram(
             "Visit Type Category",
             TechReasonsFrequency,

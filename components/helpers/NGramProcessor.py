@@ -3,6 +3,9 @@ from components.bases.NGramBase import NGramBase
 
 
 class NGramProcessor(NGramBase):
+    """
+    NGramProcessor
+    """
 
     def ngram(
         self,
@@ -16,9 +19,6 @@ class NGramProcessor(NGramBase):
         bigram=None,
         trigram=None
         ):
-        """
-        processes data and graph
-        """
 
         Logger.log_message(Logger.INFO, f"Processing {category} ngram")
 
@@ -36,5 +36,5 @@ class NGramProcessor(NGramBase):
             if self.should_plot:
                 self._plot(instance.sorted_freqs, x_label, y_label, quick_run)
 
-        except:
-            Logger.log_message(Logger.ERROR, f"Failed to generate ngram for {category}")
+        except Exception as e:
+            Logger.log_message(Logger.ERROR, f"Failed to generate ngram for {category}: {e}")

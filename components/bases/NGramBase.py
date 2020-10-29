@@ -1,16 +1,28 @@
-from components.helpers.Logger import Logger
+from abc import ABC, abstractmethod
+
+class NGramBase(ABC):
+    """
+    NGramBase
+    """
+
+    def __init__(self):
+        self.quick_run = None
+        self.should_plot = None
 
 
-class NGramBase:
-
-    def ngram(self):
+    @abstractmethod
+    def ngram(self, *args, **kwargs):
         pass
+
+
+    def _plot(self, *args, **kwargs):
+        pass
+
 
     @staticmethod
     def clean_helper(instance):
         """
-        Takes an initialized class in RunnerBase.ngram()
-        Cleans text content
+        clean_helper
         """
         instance.add_custom_stopwords()
         instance.clean()
@@ -18,8 +30,7 @@ class NGramBase:
 
     def bigram_helper(self, instance):
         """
-        Takes an initialized class in RunnerBase.ngram()
-        Controls execution of code to create bigrams
+        bigram_helper
         """
         instance.get_notes_bigrams()
         instance.write_file(instance.sorted_bigrams, "frequency_by_technician_notes_bigrams")
@@ -35,8 +46,7 @@ class NGramBase:
 
     def trigram_helper(self, instance):
         """
-        Takes an initialized class in RunnerBase.ngram()
-        Controls execution of code to create trigrams
+        trigram_helper
         """
         instance.get_notes_trigrams()
         instance.write_file(instance.sorted_trigrams, "frequency_by_technician_notes_trigrams")

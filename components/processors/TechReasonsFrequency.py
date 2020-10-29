@@ -18,7 +18,10 @@ class TechReasonsFrequency(FrequencyBase):
 
         cleaned_data = []
         for line in self._data:
-            clean = [letter if letter not in ["[", "]", "\'", "\"",  ] else '' for letter in line]
+            clean = [letter
+                    if letter not in ["[", "]", "\'", "\""]
+                    else ''
+                    for letter in line]
             split = ''.join(clean).split(',')
             for item in split:
                 cleaned_data.append(item)

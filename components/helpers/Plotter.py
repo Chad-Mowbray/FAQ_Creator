@@ -34,5 +34,5 @@ class Plotter:
                 plt.close()
             else:
                 plt.show()
-        except:
-            Logger.log_message(Logger.ERROR, f"Failed to plot graph for {self.title}")
+        except Exception as e:
+            Logger.log_message(Logger.ERROR, f"Failed to plot graph for {self.title}: {e}")

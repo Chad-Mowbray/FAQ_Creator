@@ -32,9 +32,17 @@ function check_output_files {
 
 function main {
     echo "running quick testing script..."
-    # run_linter
+    
+    run_linter
+
+    START_TIME=`date +%s`
     run_program
+    END_TIME=`date +%s`
+    RUNTIME=$((END_TIME - START_TIME))
+
     check_output_files
+
+    echo "Program ran in: " $RUNTIME " seconds"
 }
 
 main

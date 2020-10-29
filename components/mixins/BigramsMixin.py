@@ -5,6 +5,9 @@ class BigramsMixin:
     """
     A mixin to handle bigram processing
     """
+    def __init__(self):
+        self.bigrams_fdist = None
+        self.sorted_bigrams = None
 
     def get_notes_bigrams(self):
         # run after self.clean
