@@ -32,7 +32,7 @@ function check_output_files {
 
 function main {
     echo "running quick testing script..."
-    run_linter
+    # run_linter
     run_program
     check_output_files
 }

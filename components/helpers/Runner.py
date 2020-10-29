@@ -6,6 +6,7 @@ from components.helpers.Plotter import Plotter
 from components.bases.RunnerBase import RunnerBase
 from components.helpers.Logger import Logger
 
+
 class Runner(RunnerBase):
     """
     Runner inherits from RunnerBase
@@ -19,54 +20,12 @@ class Runner(RunnerBase):
         self.quick_run = quick_run
 
 
-    def _get_df(self):
-        Logger.log_message(Logger.INFO, "Getting dataframe")
-        file_reader = FileIO(self._input_file)
-        file_reader.clean_df()
-        self._df = file_reader.df
+    # def _get_df(self):
+    #     Logger.log_message(Logger.INFO, "Getting dataframe")
+    #     file_reader = FileIO(self._input_file)
+    #     file_reader.clean_df()
+    #     self._df = file_reader.df
 
-
-    @staticmethod
-    def clean_helper(instance):
-        """
-        Takes an initialized class in RunnerBase.ngram()
-        Cleans text content
-        """
-        instance.add_custom_stopwords()
-        instance.clean()
-
-
-    def bigram_helper(self, instance):
-        """
-        Takes an initialized class in RunnerBase.ngram()
-        Controls execution of code to create bigrams
-        """
-        instance.get_notes_bigrams()
-        instance.write_file(instance.sorted_bigrams, "frequency_by_technician_notes_bigrams")
-        if self.should_plot:
-            self._plot(
-                instance.sorted_bigrams,
-                "Common Bigrams in Technician Notes",
-                "Bigram",
-                quick_run=self.quick_run,
-                display_number=10
-                )
-
-    def trigram_helper(self, instance):
-        """
-        Takes an initialized class in RunnerBase.ngram()
-        Controls execution of code to create trigrams
-        """
-        instance.get_notes_trigrams()
-        instance.write_file(instance.sorted_trigrams, "frequency_by_technician_notes_trigrams")
-        if self.should_plot:
-            self._plot(
-                instance.sorted_trigrams,
-                "Common Trigrams in Technician Notes",
-                "Trigram",
-                quick_run=self.quick_run,
-                display_number=5
-                )
 
     @staticmethod
     def _plot(*args, **kwargs):
