@@ -1,36 +1,15 @@
-import sys
 import pandas as pd
-from components.helpers.Logger import Logger
+from components.bases.DataFrameCreatorBase import DataFrameCreatorBase
 
 
-class DataFrameCreator:
+class DataFrameCreatorEngagement(DataFrameCreatorBase):
     """
-    DataFrameCreator
+    DataFrameCreatorEngagement
     """
-
-    START_DATE = "03/16/2020"
-
 
     def __init__(self, input_file):
-        self._input_file = input_file
-        self.df = self._read_raw_csv()
+        super().__init__(input_file)
         self._clean_df()
-
-    def __new__(cls, *args, **kwargs):
-        if not hasattr(cls, 'instance'):
-            cls.instance = super().__new__(cls)
-        return cls.instance
-
-
-    def _read_raw_csv(self):
-        try:
-            return pd.read_csv(f'files/input/{self._input_file}')
-        except Exception as e:
-            Logger.log_message(
-                Logger.ERROR,
-                f"Failed to convert csv file {self._input_file} to dataframe: {e}"
-                )
-            sys.exit(1)
 
 
     def _clean_df(self):

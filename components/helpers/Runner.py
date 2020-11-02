@@ -4,7 +4,6 @@ from components.processors.TechReasonsFrequency import TechReasonsFrequency
 from components.helpers.Plotter import Plotter
 from components.bases.RunnerBase import RunnerBase
 from components.helpers.Logger import Logger
-from components.helpers.DataFrameCreator import DataFrameCreator
 
 
 class Runner(RunnerBase):
@@ -13,12 +12,19 @@ class Runner(RunnerBase):
     Controls execution of other components
     """
 
-    def __init__(self, input_file, should_plot, quick_run):
+    def __init__(self, input_file, should_plot, quick_run, source):
         super().__init__()
         self._input_file = input_file
         self.should_plot = should_plot
         self.quick_run = quick_run
         self._df = None
+        self.source = source
+        self.data_frame_class = getattr(__import__(f'components.helpers.{self.source}',
+                                                    globals(),
+                                                    locals(),
+                                                    [self.source],
+                                                    0),
+                                                    self.source)
 
 
     @staticmethod
@@ -33,7 +39,7 @@ class Runner(RunnerBase):
 
 
     def main(self):
-        data_frame = DataFrameCreator(self._input_file).df
+        data_frame = self.data_frame_class(self._input_file).df
         self._df = data_frame
         self.ngram(
             "Visit Type Category",
